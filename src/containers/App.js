@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import CardList from '../components/cardlist/cardlist.component';
 import './App.css';
-import SearchBox from '../components/searchbox/searchbox.component';
 import Header from '../components/header/header.component';
+import SearchBox from '../components/searchbox/searchbox.component';
 
 class App extends Component {
-
   constructor() {
     super();
     this.state = {
@@ -21,28 +20,29 @@ class App extends Component {
   }
 
   onSearchChange = (event) => {
-    this.setState({searchfield: event.target.value})
+    return this.setState({searchfield: event.target.value});
   }
 
   onClickChange = () => {
+    console.log(this.state.searchfield);
     const input = document.querySelector("input");
-    this.setState({searchfield: input.value})
+    return (this.setState({searchfield: input.value}));
   }
 
-  render() {
+
+  render(){
     const filteredRobots = this.state.robots.filter(users => {
-        return users.name.toLowerCase().includes(this.state.searchfield.toLowerCase())
+      return users.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
     })
 
-    return(
+    return (
       <div>
         <Header />
-        <SearchBox searchChange={this.onSearchChange} clickChange={this.onClickChange}/>
+        <SearchBox searchChange={this.onSearchChange} onClickChange={this.onClickChange}/>
         <CardList robots={filteredRobots}/>
       </div>
     )
   }
-
 }
 
 export default App
